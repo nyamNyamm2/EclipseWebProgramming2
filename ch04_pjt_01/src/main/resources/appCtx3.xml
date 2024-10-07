@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- EMSInformationService 빈 -->
+	<bean id="eMSInformationService"
+		class="ch04_pjt_01.ems.member.service.EMSInformationService">
+		<property name="info"
+			value="Education Management System 프로그램은 2022년에 생성되어 2024년 Sexy Sim으로 부터 수정됨." />
+		<property name="copyRight"
+			value="COPYRIGHT(C) 2022 EMS CO., LTD. ALL RIGHT RESERVED. CONTACT MASTER FOR MORE INFORMATION." />
+		<property name="ver" value="The version is 2.1" />
+		<property name="sYear" value="2022" />
+		<property name="sMonth" value="3" />
+		<property name="sDay" value="1" />
+		<property name="eYear" value="2024" />
+		<property name="eMonth" value="9" />
+		<property name="eDay" value="23" />
+		<property name="developers">
+			<list>
+				<value>Cheney.</value>
+				<value>Eloy.</value>
+				<value>Jasper.</value>
+				<value>Dillon.</value>
+				<value>Kian.</value>
+				<value>Sexy Sim.</value>
+			</list>
+		</property>
+
+		<!-- administrators 필드 초기화 -->
+		<property name="administrators">
+			<map>
+				<entry>
+					<key>
+						<value>Sim</value>
+					</key>
+					<value>sim@springPjt.org</value>
+				</entry>
+				<entry>
+					<key>
+						<value>Jasper</value>
+					</key>
+					<value>jasper@springPjt.org</value>
+				</entry>
+			</map>
+		</property>
+
+		<!-- dbInfos 필드 초기화 -->
+		<property name="dbInfos">
+			<map>
+				<entry>
+					<key>
+						<value>dev</value>
+					</key>
+					<ref bean="dev_DBConnectionInfoDev" />
+				</entry>
+				<entry>
+					<key>
+						<value>real</value>
+					</key>
+					<ref bean="real_DBConnectionInfo" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans> 

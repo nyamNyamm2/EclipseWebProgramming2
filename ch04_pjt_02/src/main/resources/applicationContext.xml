@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 빈 생성 -->
+	<bean id="injectionBean" class="ch04_pjt_02.scope.InjectionBean"/>
+
+	<!-- 프로토타입 빈 생성 -->
+	<bean id="dependencyBean" class="ch04_pjt_02.scope.DependencyBean" scope="prototype">
+		<constructor-arg ref="injectionBean"/>
+	</bean>
+	
+</beans>

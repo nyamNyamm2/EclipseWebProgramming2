@@ -74,17 +74,17 @@ public class MemberController {
 		return "sign_in";
 	}
 	
-//	@RequestMapping("/signInConfirm")  // 매핑(mapping)
-//	public String signInConfirm(MemberVo memberVo) {
-//		System.out.println("[MemberController] signInConfirm()");
-//		
-//		MemberVo signInedMember = memberService.signInConfirm(memberVo); // 서비스 호출
-//		
-//		if (signInedMember != null)		// 로그인 성공!
-//			return "sign_in_ok";
-//		else					// 로그인 실패!
-//			return "sign_in_ng";
-//		
-//	}
+	@RequestMapping("/signInConfirm")  // 매핑(mapping)
+	public String signInConfirm(MemberVo memberVo) {
+		System.out.println("[MemberController] signInConfirm()");
+		
+		MemberVo signInedMember = memberService.signInConfirm(memberVo); // 서비스 호출
+		
+		if (signInedMember != null)		// 로그인 성공!
+			return "sign_in_ok";
+		else					// 로그인 실패!
+			return "sign_in_ng";
+		
+	}
 	
 }

@@ -25,13 +25,13 @@ public class MemberService {
 		
 	}
 
-//	public MemberVo signInConfirm(MemberVo memberVo) {
-//		System.out.println("[MemberService] signInConfirm()");
-//		
-//		MemberVo signInedMember = memberDao.selectMember(memberVo);  // memberVo를 매개변수로 전달함
-//		
-//		return signInedMember;	// 로그인한 회원 정보 반환
-//		
-//	}
+	public MemberVo signInConfirm(MemberVo memberVo) {
+		System.out.println("[MemberService] signInConfirm()");
+		
+		MemberVo signInedMember = memberDao.selectMember(memberVo);  // memberVo를 매개변수로 전달함
+		
+		return signInedMember;	// 로그인한 회원 정보 반환
+		
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.office.fashion.admin.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,20 @@ public class AdminMemberService {
 		}
 		
 //		return 0;
+	}
+	
+	
+	public AdminMemberVo loginConfirm(AdminMemberVo adminMemberVo) {
+		System.out.println("[AdminMemberService] loginConfirm()");
+		
+		AdminMemberVo loginedAdminMemberVo = adminMemberDao.selectAdmin(adminMemberVo);
+		
+		if (loginedAdminMemberVo != null)
+			System.out.println("[AdminMemberService] ADMIN MEMBER LOGIN SUCCESS!!");
+		else
+			System.out.println("[AdminMemberService] ADMIN MEMBER LOGIN FAIL!!");
+		
+		return loginedAdminMemberVo;
+		
 	}
 }

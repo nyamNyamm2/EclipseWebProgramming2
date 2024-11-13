@@ -113,4 +113,41 @@ public class AdminMemberController {
 		
 	}
 	
+	
+	/*
+	 * 관리자 목록(Model 사용)
+	 */
+	@RequestMapping(value = "/listupAdmin", method = RequestMethod.GET)
+	public String listupAdmin(Model model) {
+		System.out.println("[AdminMemberController] modifyAccountConfirm()");
+	
+		String nextPage = "admin/member/listup_admins";
+		
+		List<AdminMemberVo> adminMemberVos = adminMemberService.listupAdmin();
+		
+		model.addAttribute("adminMemberVos", adminMemberVos);
+		
+		return nextPage;
+		
+	}
+	
+	
+	/*
+	 * 관리자 승인
+	 */
+	@RequestMapping(value = "/setAdminApproval", method = RequestMethod.GET)
+	public String setAdminApproval(@RequestParam("a_m_no") int a_m_no) {
+		System.out.println("[AdminMemberController] setAdminApproval()");
+		
+		String nextPage = "redirect:/admin/member/listupAdmin";
+		
+		adminMemberService.setAdminApproval(a_m_no);
+		
+		return nextPage;
+		
+	}
+	
+	
+	
+	
 }

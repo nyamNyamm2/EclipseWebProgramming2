@@ -54,7 +54,6 @@ public class AdminMemberController {
 		
 	}
 	
-	
 	/*
 	 * 로그인
 	 */
@@ -68,7 +67,6 @@ public class AdminMemberController {
 		return nextPage;
 		
 	}
-	
 	
 	/*
 	 * 로그인 확인
@@ -95,19 +93,147 @@ public class AdminMemberController {
 		
 	}
 	
+	/*
+	 * 로그아웃 확인
+	 */
+//	@RequestMapping(value = "/logoutConfirm", method = RequestMethod.GET)
+	@GetMapping("/logoutConfirm")
+	public String logoutConfirm(HttpSession session) {
+		System.out.println("[AdminMemberController] logoutConfirm()");
+		
+		String nextPage = "redirect:/admin";
+		
+//		session.removeAttribute("loginedAdminMemberVo");
+		session.invalidate();
+		
+		return nextPage;
+		
+	}
 	
 	/*
 	 * 관리자 목록(Model 사용)
 	 */
+//	@RequestMapping(value = "/listupAdmin", method = RequestMethod.GET)
+//	public String listupAdmin(Model model) {
+//		System.out.println("[AdminMemberController] modifyAccountConfirm()");
+//	
+//		String nextPage = "admin/member/listup_admins";
+//		
+//		List<AdminMemberVo> adminMemberVos = adminMemberService.listupAdmin();
+//		
+//		model.addAttribute("adminMemberVos", adminMemberVos);
+//		
+//		return nextPage;
+//		
+//	}
+	
+	/*
+	 * 관리자 목록(ModelAndView 사용)
+	 */
 	@RequestMapping(value = "/listupAdmin", method = RequestMethod.GET)
-	public String listupAdmin(Model model) {
+	public ModelAndView listupAdmin() {
 		System.out.println("[AdminMemberController] modifyAccountConfirm()");
 	
 		String nextPage = "admin/member/listup_admins";
 		
 		List<AdminMemberVo> adminMemberVos = adminMemberService.listupAdmin();
 		
-		model.addAttribute("adminMemberVos", adminMemberVos);
+		ModelAndView modelAndView = new ModelAndView();		// ① ModelAndView 객체를 생성한다.
+		modelAndView.setViewName(nextPage);					// ② ModelAndView에 뷰를 설정한다.
+		modelAndView.addObject("adminMemberVos", adminMemberVos);	// ③ ModelAndView에 데이터를 추가한다.
+		
+		return modelAndView;								// ④ ModelAndView를 반환한다.
+		
+	}
+	
+	/*
+	 * 관리자 승인
+	 */
+	@RequestMapping(value = "/setAdminApproval", method = RequestMethod.GET)
+	public String setAdminApproval(@RequestParam("a_m_no") int a_m_no) {
+		System.out.println("[AdminMemberController] setAdminApproval()");
+		
+		String nextPage = "redirect:/admin/member/listupAdmin";
+		
+		adminMemberService.setAdminApproval(a_m_no);
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 회원정보 수정
+	 */
+//	@RequestMapping(value = "/modifyAccountForm", method = RequestMethod.GET)
+	@GetMapping("/modifyAccountForm")
+	public String modifyAccountForm(HttpSession session) {
+		System.out.println("[AdminMemberController] modifyAccountForm()");
+		
+		String nextPage = "admin/member/modify_account_form";
+		
+		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
+		if (loginedAdminMemberVo == null)
+			nextPage = "redirect:/admin/member/loginForm";
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 회원정보 수정 확인
+	 */
+//	@RequestMapping(value = "/modifyAccountConfirm", method = RequestMethod.POST)
+	@PostMapping("/modifyAccountConfirm")
+	public String modifyAccountConfirm(AdminMemberVo adminMemberVo, HttpSession session) {
+		System.out.println("[AdminMemberController] modifyAccountConfirm()");
+		
+		String nextPage = "admin/member/modify_account_ok";
+		
+		int result = adminMemberService.modifyAccountConfirm(adminMemberVo);
+		
+		if (result > 0) {
+			AdminMemberVo loginedAdminMemberVo = adminMemberService.getLoginedAdminMemberVo(adminMemberVo.getA_m_no());
+			
+			session.setAttribute("loginedAdminMemberVo", loginedAdminMemberVo);
+			session.setMaxInactiveInterval(60 * 30);
+			
+		} else {
+			nextPage = "admin/member/modify_account_ng";
+			
+		}
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 비밀번호 찾기
+	 */
+//	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
+	@GetMapping("/findPasswordForm")
+	public String findePasswordForm() {
+		System.out.println("[AdminMemberController] findPasswordForm()");
+		
+		String nextPage = "admin/member/find_password_form";
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 비밀번호 찾기 확인
+	 */
+//	@RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.POST)
+	@PostMapping("/findPasswordConfirm")
+	public String findPasswordConfirm(AdminMemberVo adminMemberVo) {
+		System.out.println("[AdminMemberController] findPasswordConfirm()");
+		
+		String nextPage = "admin/member/find_password_ok";
+		
+		int result = adminMemberService.findPasswordConfirm(adminMemberVo);
+		
+		if (result <= 0)
+			nextPage = "admin/member/find_password_ng";
 		
 		return nextPage;
 		

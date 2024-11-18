@@ -27,7 +27,7 @@
 		
 			<div class="word">
 			
-				<h3>MODIFY ACCOUNT FORM</h3>
+				<h3>관리자 계정 정보 변경</h3>
 				
 			</div>
 		
@@ -43,18 +43,18 @@
 					
 					<input type="text"		name="a_m_id" 		value="<%= loginedAdminMemberVo.getA_m_id() %>" readonly disabled> <br>
 					<input type="password"	name="a_m_pw" 		value="******" readonly disabled> <br>
-					<input type="text"		name="a_m_name" 	value="<%= loginedAdminMemberVo.getA_m_name() %>" placeholder="INPUT USER NAME."> <br>
+					<input type="text"		name="a_m_name" 	value="<%= loginedAdminMemberVo.getA_m_name() %>" placeholder="관리자 이름 입력"> <br>
 					<select name="a_m_gender">
-						<option value="">SELECET USER GENDER.</option>
-						<option value="M" <% if (loginedAdminMemberVo.getA_m_gender().equals("M")) {%> selected <%}%>>Man</option>
-						<option value="W" <% if (loginedAdminMemberVo.getA_m_gender().equals("W")) {%> selected <%}%>>Woman</option>
+						<option value="">성별 선택</option>
+						<option value="M" <% if (loginedAdminMemberVo.getA_m_gender().equals("M")) {%> selected <%}%>>남성</option>
+						<option value="W" <% if (loginedAdminMemberVo.getA_m_gender().equals("W")) {%> selected <%}%>>여성</option>
 					</select> <br>
-					<input type="text"		name="a_m_part"		value="<%= loginedAdminMemberVo.getA_m_part() %>" placeholder="INPUT USER PART." ><br>
-					<input type="text"		name="a_m_position"	value="<%= loginedAdminMemberVo.getA_m_position() %>" placeholder="INPUT USER POSITION." ><br>
-					<input type="email"		name="a_m_mail"		value="<%= loginedAdminMemberVo.getA_m_mail() %>" placeholder="INPUT USER MAIL." ><br>
-					<input type="text"		name="a_m_phone"	value="<%= loginedAdminMemberVo.getA_m_phone() %>" placeholder="INPUT USER PHONE."> <br>
-					<input type="button"	value="modify account" onclick="modifyAccountForm();"> 
-					<input type="reset"		value="reset">
+					<input type="text"		name="a_m_part"		value="<%= loginedAdminMemberVo.getA_m_part() %>" placeholder="관리자 부서 입력" ><br>
+					<input type="text"		name="a_m_position"	value="<%= loginedAdminMemberVo.getA_m_position() %>" placeholder="관리자 직책 입력" ><br>
+					<input type="email"		name="a_m_mail"		value="<%= loginedAdminMemberVo.getA_m_mail() %>" placeholder="관리자 메일 입력" ><br>
+					<input type="text"		name="a_m_phone"	value="<%= loginedAdminMemberVo.getA_m_phone() %>" placeholder="I관리자 전화번호 입력"> <br>
+					<input type="button"	value="수정 완료" onclick="modifyAccountForm();"> 
+					<input type="reset"		value="초기화">
 					
 				</form>
 				

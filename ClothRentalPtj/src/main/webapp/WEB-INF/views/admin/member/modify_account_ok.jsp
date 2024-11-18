@@ -24,7 +24,7 @@
 		
 			<div class="word">
 			
-				<h3>MODIFY ACCOUNT SUCCESS!!</h3>
+				<h3>관리자 게정 정보 수정 성공! 킹애! ദ്ദി ( ᵔ ᗜ ᵔ )</h3>
 				
 			</div>
 		

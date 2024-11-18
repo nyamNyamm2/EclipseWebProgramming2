@@ -45,7 +45,7 @@
 			
 			<div class="find_password_create_account">
 				
-				<a href="<c:url value='/admin/member/findePasswordForm' />">비밀번호 찾기</a>
+				<a href="<c:url value='/admin/member/findPasswordForm' />">비밀번호 찾기</a>
 				<a href="<c:url value='/admin/member/createAccountForm' />">계정 생성</a>
 				
 			</div>

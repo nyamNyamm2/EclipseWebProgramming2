@@ -5,7 +5,7 @@
 	<div id="footer_wrap">
 		
 		<div class="office_info">
-			Copyright ©OFFICE Corp.All Rights Reserved.
+			Copyright ©Fashion Sim OFFICE Corp. All Rights Reserved.
 		</div>
 		
 	</div>

@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/modify_account_result.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/admin/find_password_result.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,7 +24,13 @@
 		
 			<div class="word">
 			
-				<h3>관리자 계정 정보 수정 실패...ㄴ(ㅜ_ㅜ)ㄱ</h3>
+				<h3>새 비밀번호가 이메일로 전송 됐습니다! 킹애! ദ്ദി ( ᵔ ᗜ ᵔ )</h3>
+				
+			</div>
+			
+			<div class="others">
+				
+				<a href="<c:url value='/admin/member/loginForm' />">로그인</a>
 				
 			</div>
 		

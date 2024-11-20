@@ -3,14 +3,14 @@
 
 <script type="text/javascript">
 
-	function searchBookForm() {
-		console.log('searchBookForm() CALLED!!');
+	function searchClothesForm() {
+		console.log('searchClothesForm() CALLED!!');
 		
-		let form = document.search_book_form;
+		let form = document.search_Clothes_form;
 		
-		if (form.b_name.value == '') {
+		if (form.c_name.value == '') {
 			alert('찾으시는 옷을 입력하세요!');
-			form.b_name.focus();
+			form.c_name.focus();
 			
 		} else {
 			form.submit();

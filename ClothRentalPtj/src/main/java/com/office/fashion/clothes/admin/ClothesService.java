@@ -10,66 +10,66 @@ import com.office.fashion.clothes.*;
 @Service
 public class ClothesService {
 
-	final static public int BOOK_ISBN_ALREADY_EXIST = 0;	// 이미 등록된 도서
-	final static public int BOOK_REGISTER_SUCCESS = 1;	// 신규 도서 등록 성공
-	final static public int BOOK_REGISTER_FAIL = -1;	// 신규 도서 등록 실패
+	final static public int Clothes_ISBN_ALREADY_EXIST = 0;	// 이미 등록된 도서
+	final static public int Clothes_REGISTER_SUCCESS = 1;	// 신규 도서 등록 성공
+	final static public int Clothes_REGISTER_FAIL = -1;	// 신규 도서 등록 실패
 	
 	@Autowired
 	ClothesDao clothesDao;
 
-	public int registerBookConfirm(ClothesVo clothesVo) {
-		System.out.println("[BookService] registerBookConfirm()");
+	public int registerClothesConfirm(ClothesVo clothesVo) {
+		System.out.println("[ClothesService] registerClothesConfirm()");
 		
-		boolean isISBN = clothesDao.isISBN(clothesVo.getB_isbn());
+		boolean isISBN = clothesDao.isISBN(clothesVo.getC_isbn());
 		
 		if (!isISBN) {
-			int result = clothesDao.insertBook(clothesVo);
+			int result = clothesDao.insertClothes(clothesVo);
 			
 			if (result > 0)
-				return BOOK_REGISTER_SUCCESS;
+				return Clothes_REGISTER_SUCCESS;
 			
 			else
-				return BOOK_REGISTER_FAIL;
+				return Clothes_REGISTER_FAIL;
 			
 		} else {
-			return BOOK_ISBN_ALREADY_EXIST;
+			return Clothes_ISBN_ALREADY_EXIST;
 			
 		}
 		
 	}
 	
-	public List<ClothesVo> searchBookConfirm(ClothesVo clothesVo) {
-		System.out.println("[BookService] searchBookConfirm()");
+	public List<ClothesVo> searchClothesConfirm(ClothesVo clothesVo) {
+		System.out.println("[ClothesService] searchClothesConfirm()");
 		
-		return clothesDao.selectBooksBySearch(clothesVo);
-		
-	}
-	
-	public ClothesVo bookDetail(int b_no) {
-		System.out.println("[BookService] bookDetail()");
-		
-		return clothesDao.selectBook(b_no);
+		return clothesDao.selectClothessBySearch(clothesVo);
 		
 	}
 	
-	public ClothesVo modifyBookForm(int b_no) {
-		System.out.println("[BookService] modifyBookForm()");
+	public ClothesVo ClothesDetail(int b_no) {
+		System.out.println("[ClothesService] ClothesDetail()");
 		
-		return clothesDao.selectBook(b_no);
-		
-	}
-	
-	public int modifyBookConfirm(ClothesVo clothesVo) {
-		System.out.println("[BookService] modifyBookConfirm()");
-		
-		return clothesDao.updateBook(clothesVo);
+		return clothesDao.selectClothes(b_no);
 		
 	}
 	
-	public int deleteBookConfirm(int b_no) {
-		System.out.println("[BookService] deleteBookConfirm()");
+	public ClothesVo modifyClothesForm(int b_no) {
+		System.out.println("[ClothesService] modifyClothesForm()");
 		
-		return clothesDao.deleteBook(b_no);
+		return clothesDao.selectClothes(b_no);
+		
+	}
+	
+	public int modifyClothesConfirm(ClothesVo clothesVo) {
+		System.out.println("[ClothesService] modifyClothesConfirm()");
+		
+		return clothesDao.updateClothes(clothesVo);
+		
+	}
+	
+	public int deleteClothesConfirm(int b_no) {
+		System.out.println("[ClothesService] deleteClothesConfirm()");
+		
+		return clothesDao.deleteClothes(b_no);
 		
 	}
 	

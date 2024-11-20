@@ -37,11 +37,11 @@ public class UploadFileService {
 		}
 		
 		if (result) {
-			System.out.println("[UploadFileService] FILE UPLOAD SUCCESS!!");
+			System.out.println("[UploadFileService] 파일 업로드 성공");
 			return uniqueName + fileExtension;
 			
 		} else {
-			System.out.println("[UploadFileService] FILE UPLOAD FAIL!!");
+			System.out.println("[UploadFileService] 파일 업로드 실패");
 			return null;
 			
 		}

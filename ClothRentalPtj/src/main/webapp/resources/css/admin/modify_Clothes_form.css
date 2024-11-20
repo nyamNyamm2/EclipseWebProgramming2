@@ -13,23 +13,23 @@ section {
 	text-align: center;
 	}
 	
-#section_wrap .modify_book_form {
+#section_wrap .modify_Clothes_form {
 	width: 1024px;
 	margin: 0 auto;
 	text-align: center;
 	}
 
-#section_wrap .modify_book_form input {
+#section_wrap .modify_Clothes_form input {
 	width: 300px;
 	margin: 3px;
 	}
 
-#section_wrap .modify_book_form select {
+#section_wrap .modify_Clothes_form select {
 	width: 322px;
 	margin: 3px;
 	}
 
-#section_wrap .modify_book_form input[type='button'],
-#section_wrap .modify_book_form input[type='reset'] {
+#section_wrap .modify_Clothes_form input[type='button'],
+#section_wrap .modify_Clothes_form input[type='reset'] {
 	width: 156px;
 	}

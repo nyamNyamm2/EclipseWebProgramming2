@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/admin/register_book_result.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/admin/modify_Clothes_result.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 		
 			<div class="word">
 			
-				<h3>REGISTER BOOK FAIL!!</h3>
+				<h3>의류 상세정보 변경 성공했습니다! 킹애! ദ്ദി ( ᵔ ᗜ ᵔ )</h3>
 				
 			</div>
 		

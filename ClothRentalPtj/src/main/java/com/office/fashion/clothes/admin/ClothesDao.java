@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.office.fashion.clothes.*;
+import com.office.fashion.clothes.ClothesVo;
 
 @Component
 public class ClothesDao {
@@ -18,46 +18,44 @@ public class ClothesDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public boolean isISBN(String b_isbn) {
-		System.out.println("[BookDao] isISBN()");
+	public boolean isISBN(String c_isbn) {
+		System.out.println("[ClothesDao] isISBN()");
 		
-		String sql =  "SELECT COUNT(*) FROM tbl_book "
-					+ "WHERE b_isbn = ?";
+		String sql =  "SELECT COUNT(*) FROM tbl_clothes "
+					+ "WHERE c_isbn = ?";
 		
-		int result = jdbcTemplate.queryForObject(sql, Integer.class, b_isbn);
+		int result = jdbcTemplate.queryForObject(sql, Integer.class, c_isbn);
 		
 		return result > 0 ? true : false;
 		
 	}
 	
-	public int insertBook(ClothesVo clothesVo) {
-		System.out.println("[BookDao] insertBook()");
+	public int insertClothes(ClothesVo clothesVo) {
+		System.out.println("[ClothesDao] insertClothes()");
 		
-		String sql = "INSERT INTO tbl_book(b_thumbnail, "
-										+ "b_name, "
-										+ "b_author, "
-										+ "b_publisher, "
-										+ "b_publish_year, "
-										+ "b_isbn, "
-										+ "b_call_number, "
-										+ "b_rantal_able, "
-										+ "b_reg_date, "
-										+ "b_mod_date) "
-										+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
+		String sql = "INSERT INTO tbl_clothes(c_thumbnail, "
+										+ "c_name, "
+										+ "c_author, "
+										+ "c_publisher, "
+										+ "c_publish_year, "
+										+ "c_isbn, "
+										+ "c_rantal_able, "
+										+ "c_reg_date, "
+										+ "c_mod_date) "
+										+ "VALUES(?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 		
 		int result = -1;
 		
 		try {
 			
 			result = jdbcTemplate.update(sql,
-											clothesVo.getB_thumbnail(), 
-											clothesVo.getB_name(),
-											clothesVo.getB_author(),
-											clothesVo.getB_publisher(),
-											clothesVo.getB_publish_year(),
-											clothesVo.getB_isbn(),
-											clothesVo.getB_call_number(),
-											clothesVo.getB_rantal_able()
+											clothesVo.getC_thumbnail(), 
+											clothesVo.getC_name(),
+											clothesVo.getC_author(),
+											clothesVo.getC_publisher(),
+											clothesVo.getC_publish_year(),
+											clothesVo.getC_isbn(),
+											clothesVo.getC_rantal_able()
 											);
 			
 		} catch (Exception e) {
@@ -69,12 +67,12 @@ public class ClothesDao {
 		
 	}
 	
-	public List<ClothesVo> selectBooksBySearch(ClothesVo clothesVo) {
-		System.out.println("[BookDao] selectBooks()");
+	public List<ClothesVo> selectClothessBySearch(ClothesVo clothesVo) {
+		System.out.println("[ClothesDao] selectClothess()");
 		
-		String sql =  "SELECT * FROM tbl_book "
-					+ "WHERE b_name LIKE ? "
-					+ "ORDER BY b_no DESC";
+		String sql =  "SELECT * FROM tbl_clothes "
+					+ "WHERE c_name LIKE ? "
+					+ "ORDER BY c_no DESC";
 		
 		List<ClothesVo> clothesVos = null;
 		
@@ -87,23 +85,22 @@ public class ClothesDao {
 					
 					ClothesVo clothesVo = new ClothesVo();
 					
-					clothesVo.setB_no(rs.getInt("b_no"));
-					clothesVo.setB_thumbnail(rs.getString("b_thumbnail"));
-					clothesVo.setB_name(rs.getString("b_name"));
-					clothesVo.setB_author(rs.getString("b_author"));
-					clothesVo.setB_publisher(rs.getString("b_publisher"));
-					clothesVo.setB_publish_year(rs.getString("b_publish_year"));
-					clothesVo.setB_isbn(rs.getString("b_isbn"));
-					clothesVo.setB_call_number(rs.getString("b_call_number"));
-					clothesVo.setB_rantal_able(rs.getInt("b_rantal_able"));
-					clothesVo.setB_reg_date(rs.getString("b_reg_date"));
-					clothesVo.setB_mod_date(rs.getString("b_mod_date"));
+					clothesVo.setC_no(rs.getInt("c_no"));
+					clothesVo.setC_thumbnail(rs.getString("c_thumbnail"));
+					clothesVo.setC_name(rs.getString("c_name"));
+					clothesVo.setC_author(rs.getString("c_author"));
+					clothesVo.setC_publisher(rs.getString("c_publisher"));
+					clothesVo.setC_publish_year(rs.getString("c_publish_year"));
+					clothesVo.setC_isbn(rs.getString("c_isbn"));
+					clothesVo.setC_rantal_able(rs.getInt("c_rantal_able"));
+					clothesVo.setC_reg_date(rs.getString("c_reg_date"));
+					clothesVo.setC_mod_date(rs.getString("c_mod_date"));
 					
 					return clothesVo;
 					
 				}
 				
-			}, "%" + clothesVo.getB_name() + "%");
+			}, "%" + clothesVo.getC_name() + "%");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,10 +111,10 @@ public class ClothesDao {
 		
 	}
 	
-	public ClothesVo selectBook(int b_no) {
-		System.out.println("[BookDao] selectBook()");
+	public ClothesVo selectClothes(int c_no) {
+		System.out.println("[ClothesDao] selectClothes()");
 		
-		String sql = "SELECT * FROM tbl_book WHERE b_no = ?";
+		String sql = "SELECT * FROM tbl_clothes WHERE c_no = ?";
 		
 		List<ClothesVo> clothesVos = null;
 		
@@ -130,23 +127,22 @@ public class ClothesDao {
 					
 					ClothesVo clothesVo = new ClothesVo();
 					
-					clothesVo.setB_no(rs.getInt("b_no"));
-					clothesVo.setB_thumbnail(rs.getString("b_thumbnail"));
-					clothesVo.setB_name(rs.getString("b_name"));
-					clothesVo.setB_author(rs.getString("b_author"));
-					clothesVo.setB_publisher(rs.getString("b_publisher"));
-					clothesVo.setB_publish_year(rs.getString("b_publish_year"));
-					clothesVo.setB_isbn(rs.getString("b_isbn"));
-					clothesVo.setB_call_number(rs.getString("b_call_number"));
-					clothesVo.setB_rantal_able(rs.getInt("b_rantal_able"));
-					clothesVo.setB_reg_date(rs.getString("b_reg_date"));
-					clothesVo.setB_mod_date(rs.getString("b_mod_date"));
+					clothesVo.setC_no(rs.getInt("c_no"));
+					clothesVo.setC_thumbnail(rs.getString("c_thumbnail"));
+					clothesVo.setC_name(rs.getString("c_name"));
+					clothesVo.setC_author(rs.getString("c_author"));
+					clothesVo.setC_publisher(rs.getString("c_publisher"));
+					clothesVo.setC_publish_year(rs.getString("c_publish_year"));
+					clothesVo.setC_isbn(rs.getString("c_isbn"));
+					clothesVo.setC_rantal_able(rs.getInt("c_rantal_able"));
+					clothesVo.setC_reg_date(rs.getString("c_reg_date"));
+					clothesVo.setC_mod_date(rs.getString("c_mod_date"));
 					
 					return clothesVo;
 					
 				}
 				
-			}, b_no);
+			}, c_no);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,42 +153,39 @@ public class ClothesDao {
 		
 	}
 	
-	public int updateBook(ClothesVo clothesVo) {
-		System.out.println("[BookDao] updateBook()");
+	public int updateClothes(ClothesVo clothesVo) {
+		System.out.println("[ClothesDao] updateClothes()");
 		
 		List<String> args = new ArrayList<String>();
 		
-		String sql =  "UPDATE tbl_book SET ";
-			   if (clothesVo.getB_thumbnail() != null) {
-				   sql += "b_thumbnail = ?, ";
-				   args.add(clothesVo.getB_thumbnail());
+		String sql =  "UPDATE tbl_clothes SET ";
+			   if (clothesVo.getC_thumbnail() != null) {
+				   sql += "c_thumbnail = ?, ";
+				   args.add(clothesVo.getC_thumbnail());
 			   }
 			   
-			   sql += "b_name = ?, ";
-			   args.add(clothesVo.getB_name());
+			   sql += "c_name = ?, ";
+			   args.add(clothesVo.getC_name());
 			   
-			   sql += "b_author = ?, ";
-			   args.add(clothesVo.getB_author());
+			   sql += "c_author = ?, ";
+			   args.add(clothesVo.getC_author());
 			   
-			   sql += "b_publisher = ?, ";
-			   args.add(clothesVo.getB_publisher());
+			   sql += "c_publisher = ?, ";
+			   args.add(clothesVo.getC_publisher());
 			   
-			   sql += "b_publish_year = ?, ";
-			   args.add(clothesVo.getB_publish_year());
+			   sql += "c_publish_year = ?, ";
+			   args.add(clothesVo.getC_publish_year());
 			   
-			   sql += "b_isbn = ?, ";
-			   args.add(clothesVo.getB_isbn());
+			   sql += "c_isbn = ?, ";
+			   args.add(clothesVo.getC_isbn());
 			   
-			   sql += "b_call_number = ?, ";
-			   args.add(clothesVo.getB_call_number());
+			   sql += "c_rantal_able = ?, ";
+			   args.add(Integer.toString(clothesVo.getC_rantal_able()));
 			   
-			   sql += "b_rantal_able = ?, ";
-			   args.add(Integer.toString(clothesVo.getB_rantal_able()));
+			   sql += "c_mod_date = NOW() ";
 			   
-			   sql += "b_mod_date = NOW() ";
-			   
-			   sql += "WHERE b_no = ?";
-			   args.add(Integer.toString(clothesVo.getB_no()));
+			   sql += "WHERE c_no = ?";
+			   args.add(Integer.toString(clothesVo.getC_no()));
 			   
 		
 		int result = -1;
@@ -210,17 +203,17 @@ public class ClothesDao {
 		
 	}
 	
-	public int deleteBook(int b_no) {
-		System.out.println("[BookDao] deleteBook()");
+	public int deleteClothes(int c_no) {
+		System.out.println("[ClothesDao] deleteClothes()");
 		
-		String sql =  "DELETE FROM tbl_book "
-					+ "WHERE b_no = ?";
+		String sql =  "DELETE FROM tbl_clothes "
+					+ "WHERE c_no = ?";
 		
 		int result = -1;
 		
 		try {
 			
-			result = jdbcTemplate.update(sql, b_no);
+			result = jdbcTemplate.update(sql, c_no);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

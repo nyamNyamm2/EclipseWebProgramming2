@@ -19,7 +19,7 @@ import com.office.fashion.clothes.*;
 import com.office.fashion.clothes.admin.util.*;
 
 @Controller
-@RequestMapping("/book/admin")
+@RequestMapping("/Clothes/admin")
 public class ClothesController {
 
 	@Autowired
@@ -31,12 +31,12 @@ public class ClothesController {
 	/*
 	 * 도서 등록
 	 */
-//	@RequestMapping(value = "/registerBookForm", method = RequestMethod.GET)
-	@GetMapping("/registerBookForm")
-	public String registerBookForm() {
-		System.out.println("[BookController] registerBookForm()");
+//	@RequestMapping(value = "/registerClothesForm", method = RequestMethod.GET)
+	@GetMapping("/registerClothesForm")
+	public String registerClothesForm() {
+		System.out.println("[ClothesController] registerClothesForm()");
 		
-		String nextPage = "admin/book/register_book_form";
+		String nextPage = "admin/Clothes/register_Clothes_form";
 		
 		return nextPage;
 		
@@ -45,26 +45,26 @@ public class ClothesController {
 	/*
 	 * 도서 등록 확인
 	 */
-//	@RequestMapping(value = "/registerBookConfirm", method = RequestMethod.POST)
-	@PostMapping("/registerBookConfirm")
-	public String registerBookConfirm(ClothesVo clothesVo, 
+//	@RequestMapping(value = "/registerClothesConfirm", method = RequestMethod.POST)
+	@PostMapping("/registerClothesConfirm")
+	public String registerClothesConfirm(ClothesVo clothesVo, 
 									  @RequestParam("file") MultipartFile file) {
-		System.out.println("[BookController] registerBookConfirm()");
+		System.out.println("[ClothesController] registerClothesConfirm()");
 		
-		String nextPage = "admin/book/register_book_ok";
+		String nextPage = "admin/Clothes/register_Clothes_ok";
 		
 		// SAVE FILE
 		String savedFileName = uploadFileService.upload(file);
 		
 		if (savedFileName != null) {
-			clothesVo.setB_thumbnail(savedFileName);
-			int result = clothesService.registerBookConfirm(clothesVo);
+			clothesVo.setC_thumbnail(savedFileName);
+			int result = clothesService.registerClothesConfirm(clothesVo);
 			
 			if (result <= 0)
-				nextPage = "admin/book/register_book_ng";
+				nextPage = "admin/Clothes/register_Clothes_ng";
 			
 		} else {
-			nextPage = "admin/book/register_book_ng";
+			nextPage = "admin/Clothes/register_Clothes_ng";
 			
 		}
 		
@@ -75,16 +75,16 @@ public class ClothesController {
 	/*
 	 * 도서 검색
 	 */
-//	@RequestMapping(value = "/searchBookConfirm", method = RequestMethod.GET)
-	@GetMapping("/searchBookConfirm")
-	public String searchBookConfirm(ClothesVo clothesVo, Model model) {
-		System.out.println("[UserBookController] searchBookConfirm()");
+//	@RequestMapping(value = "/searchClothesConfirm", method = RequestMethod.GET)
+	@GetMapping("/searchClothesConfirm")
+	public String searchClothesConfirm(ClothesVo clothesVo, Model model) {
+		System.out.println("[UserClothesController] searchClothesConfirm()");
 		
-		String nextPage = "admin/book/search_book";
+		String nextPage = "admin/Clothes/search_Clothes";
 		
-		List<ClothesVo> clothesVos = clothesService.searchBookConfirm(clothesVo);
+		List<ClothesVo> clothesVos = clothesService.searchClothesConfirm(clothesVo);
 		
-		model.addAttribute("bookVos", clothesVos);
+		model.addAttribute("ClothesVos", clothesVos);
 		
 		return nextPage;
 		
@@ -93,16 +93,16 @@ public class ClothesController {
 	/*
 	 * 도서 상세
 	 */
-//	@RequestMapping(value = "/bookDetail", method = RequestMethod.GET)
-	@GetMapping("/bookDetail")
-	public String bookDetail(@RequestParam("b_no") int b_no, Model model) {
-		System.out.println("[BookController] bookDetail()");
+//	@RequestMapping(value = "/ClothesDetail", method = RequestMethod.GET)
+	@GetMapping("/ClothesDetail")
+	public String ClothesDetail(@RequestParam("c_no") int c_no, Model model) {
+		System.out.println("[ClothesController] ClothesDetail()");
 		
-		String nextPage = "admin/book/book_detail";
+		String nextPage = "admin/Clothes/Clothes_detail";
 		
-		ClothesVo clothesVo = clothesService.bookDetail(b_no);
+		ClothesVo clothesVo = clothesService.ClothesDetail(c_no);
 		
-		model.addAttribute("bookVo", clothesVo);
+		model.addAttribute("ClothesVo", clothesVo);
 		
 		return nextPage;
 		
@@ -111,22 +111,22 @@ public class ClothesController {
 	/*
 	 * 도서 수정
 	 */
-//	@RequestMapping(value = "/modifyBookForm", method = RequestMethod.GET)
-	@GetMapping("/modifyBookForm")
-	public String modifyBookForm(@RequestParam("b_no") int b_no, 
+//	@RequestMapping(value = "/modifyClothesForm", method = RequestMethod.GET)
+	@GetMapping("/modifyClothesForm")
+	public String modifyClothesForm(@RequestParam("c_no") int c_no, 
 								 Model model, 
 								 HttpSession session) {
-		System.out.println("[BookController] bookDetail()");
+		System.out.println("[ClothesController] ClothesDetail()");
 		
-		String nextPage = "admin/book/modify_book_form";
+		String nextPage = "admin/Clothes/modify_Clothes_form";
 		
 		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
 		if (loginedAdminMemberVo == null)
 			return "redirect:/admin/member//loginForm";
 		
-		ClothesVo clothesVo = clothesService.modifyBookForm(b_no);
+		ClothesVo clothesVo = clothesService.modifyClothesForm(c_no);
 		
-		model.addAttribute("bookVo", clothesVo);
+		model.addAttribute("ClothesVo", clothesVo);
 		
 		return nextPage;
 		
@@ -135,14 +135,14 @@ public class ClothesController {
 	/*
 	 * 도서 수정 확인
 	 */
-//	@RequestMapping(value = "/modifyBookConfirm", method = RequestMethod.POST)
-	@PostMapping("/modifyBookConfirm")
-	public String modifyBookConfirm(ClothesVo clothesVo, 
+//	@RequestMapping(value = "/modifyClothesConfirm", method = RequestMethod.POST)
+	@PostMapping("/modifyClothesConfirm")
+	public String modifyClothesConfirm(ClothesVo clothesVo, 
 									@RequestParam("file") MultipartFile file, 
 									HttpSession session) {
-		System.out.println("[BookController] modifyBookConfirm()");
+		System.out.println("[ClothesController] modifyClothesConfirm()");
 		
-		String nextPage = "admin/book/modify_book_ok";
+		String nextPage = "admin/Clothes/modify_Clothes_ok";
 		
 		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
 		if (loginedAdminMemberVo == null)
@@ -152,14 +152,14 @@ public class ClothesController {
 			// SAVE FILE
 			String savedFileName = uploadFileService.upload(file);
 			if (savedFileName != null)
-				clothesVo.setB_thumbnail(savedFileName);
+				clothesVo.setC_thumbnail(savedFileName);
 			
 		}
 		
-		int result = clothesService.modifyBookConfirm(clothesVo);
+		int result = clothesService.modifyClothesConfirm(clothesVo);
 		
 		if (result <= 0)
-			nextPage = "admin/book/modify_book_ng";
+			nextPage = "admin/Clothes/modify_Clothes_ng";
 		
 		return nextPage;
 		
@@ -168,22 +168,22 @@ public class ClothesController {
 	/*
 	 * 도서 삭제 확인
 	 */
-//	@RequestMapping(value = "/deleteBookConfirm", method = RequestMethod.GET)
-	@GetMapping("/deleteBookConfirm")
-	public String deleteBookConfirm(@RequestParam("b_no") int b_no, 
+//	@RequestMapping(value = "/deleteClothesConfirm", method = RequestMethod.GET)
+	@GetMapping("/deleteClothesConfirm")
+	public String deleteClothesConfirm(@RequestParam("c_no") int c_no, 
 									HttpSession session) {
-		System.out.println("[BookController] deleteBookConfirm()");
+		System.out.println("[ClothesController] deleteClothesConfirm()");
 		
-		String nextPage = "admin/book/delete_book_ok";
+		String nextPage = "admin/Clothes/delete_Clothes_ok";
 		
 		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
 		if (loginedAdminMemberVo == null)
 			return "redirect:/admin/member//loginForm";
 		
-		int result = clothesService.deleteBookConfirm(b_no);
+		int result = clothesService.deleteClothesConfirm(c_no);
 		
 		if (result <= 0)
-			nextPage = "admin/book/delete_book_ng";
+			nextPage = "admin/Clothes/delete_Clothes_ng";
 		
 		return nextPage;
 		

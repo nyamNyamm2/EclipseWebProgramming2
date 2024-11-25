@@ -3,7 +3,7 @@ section {
 	}
 
 #section_wrap {
-	width: 1200px;
+	width: 2400px;
 	margin: 0 auto;
 	}
 	
@@ -22,7 +22,7 @@ section {
 	}
 
 #section_wrap .banners .small_banners ul li {
-	width: 250px; 
+	width: 240px; 
 	margin-right: 8px;
 	float: left;
 	}

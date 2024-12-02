@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.office.fashion.clothes.*;
+import com.office.fashion.clothes.ClothesVo;
+//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.RentalClothesVo;
 
 @Service
 public class ClothesService {
@@ -45,17 +47,17 @@ public class ClothesService {
 		
 	}
 	
-	public ClothesVo ClothesDetail(int b_no) {
+	public ClothesVo ClothesDetail(int c_no) {
 		System.out.println("[ClothesService] ClothesDetail()");
 		
-		return clothesDao.selectClothes(b_no);
+		return clothesDao.selectClothes(c_no);
 		
 	}
 	
-	public ClothesVo modifyClothesForm(int b_no) {
+	public ClothesVo modifyClothesForm(int c_no) {
 		System.out.println("[ClothesService] modifyClothesForm()");
 		
-		return clothesDao.selectClothes(b_no);
+		return clothesDao.selectClothes(c_no);
 		
 	}
 	
@@ -66,12 +68,30 @@ public class ClothesService {
 		
 	}
 	
-	public int deleteClothesConfirm(int b_no) {
+	public int deleteClothesConfirm(int c_no) {
 		System.out.println("[ClothesService] deleteClothesConfirm()");
 		
-		return clothesDao.deleteClothes(b_no);
+		return clothesDao.deleteClothes(c_no);
 		
 	}
 	
+	
+	public List<RentalClothesVo> getRentalClothess() {
+		System.out.println("[ClothesService] getRentalClothess()");
+		
+		return clothesDao.selectRentalClothess();
+		
+	}
+	
+	public int returnClothesConfirm(int c_no, int rc_no) {
+		System.out.println("[ClothesService] getRentalClothess()");
+		
+		int result = clothesDao.updateRentalClothes(rc_no);
+		
+		if (result > 0) 
+			result = clothesDao.updateClothes(rc_no);
+			
+		return result;
+	}
 	
 }

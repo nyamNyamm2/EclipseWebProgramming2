@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.office.fashion.admin.member.AdminMemberVo;
-import com.office.fashion.clothes.*;
-import com.office.fashion.clothes.admin.util.*;
+import com.office.fashion.clothes.ClothesVo;
+//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.RentalClothesVo;
+import com.office.fashion.clothes.admin.util.UploadFileService;
 
 @Controller
 @RequestMapping("/Clothes/admin")
@@ -184,6 +186,46 @@ public class ClothesController {
 		
 		if (result <= 0)
 			nextPage = "admin/Clothes/delete_Clothes_ng";
+		
+		return nextPage;
+		
+	}
+	
+	
+	/*
+	 * 대출 도서 목록
+	 */
+	
+//	@RequestMapping(value = "/getRentalClothess", method = RequestMethod.GET)
+	@GetMapping("/getRentalClothess")
+	public String getRentalClothess(Model model) {
+		System.out.println("[ClothesController] getRentalClothess()");
+		
+		String nextPage = "admin/Clothes/rental_Clothess";
+		
+		List<RentalClothesVo> rentalClothesVos = clothesService.getRentalClothess();
+		
+		model.addAttribute("rentalClothesVos", rentalClothesVos);
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 도서 반납 확인
+	 */
+//	@RequestMapping(value = "/returnClothesConfirm", method = RequestMethod.GET)
+	@GetMapping("/returnClothesConfirm")
+	public String returnClothesConfirm(@RequestParam("c_no") int c_no, 
+									@RequestParam("rc_no") int rc_no) {
+		System.out.println("[ClothesController] returnClothesConfirm()");
+		
+		String nextPage = "admin/Clothes/return_Clothes_ok";
+		
+		int result = clothesService.returnClothesConfirm(c_no, rc_no);
+		
+		if (result <= 0)
+			nextPage = "admin/Clothes/return_Clothes_ng";
 		
 		return nextPage;
 		

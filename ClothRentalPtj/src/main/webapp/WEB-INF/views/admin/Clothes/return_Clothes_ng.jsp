@@ -26,7 +26,7 @@
 		
 			<div class="word">
 			
-				<h3>RETURN BOOK FAIL!!</h3>
+				<h3>의류 반납 실패...ㄴ(ㅜ_ㅜ)ㄱ</h3>
 				
 			</div>
 			

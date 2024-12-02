@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.office.fashion.clothes.ClothesVo;
+//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.RentalClothesVo;
 
 @Component
 public class ClothesDao {
@@ -223,5 +226,140 @@ public class ClothesDao {
 		return result;
 		
 	}
+	
+	
+//	public List<RentalClothesVo> selectRentalClothess() {
+//	System.out.println("[ClothesDao] selectRentalClothess()");
+//	
+//	String sql =  "SELECT * FROM tbl_rental_Clothes rb "
+//				+ "JOIN tbl_Clothes b "
+//				+ "ON rb.c_no = b.c_no "
+//				+ "JOIN tbl_user_member um "
+//				+ "ON rb.u_m_no = um.u_m_no "
+//				+ "WHERE rb.rc_end_date = '1000-01-01' "
+//				+ "ORDER BY um.u_m_id ASC, rb.rc_reg_date DESC";
+//	
+//	List<RentalClothesVo> rentalClothesVos = new ArrayList<RentalClothesVo>();
+//	
+//	try {
+//		
+//		rentalClothesVos = jdbcTemplate.query(sql, new RowMapper<RentalClothesVo>() {
+//
+//			@Override
+//			public RentalClothesVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				
+//				RentalClothesVo rentalClothesVo = new RentalClothesVo();
+//				
+//				rentalClothesVo.setRc_no(rs.getInt("rc_no"));
+//				rentalClothesVo.setc_no(rs.getInt("c_no"));
+//				rentalClothesVo.setU_m_no(rs.getInt("u_m_no"));
+//				rentalClothesVo.setRc_start_date(rs.getString("rc_start_date"));
+//				rentalClothesVo.setRc_end_date(rs.getString("rc_end_date"));
+//				rentalClothesVo.setRc_reg_date(rs.getString("rc_reg_date"));
+//				rentalClothesVo.setRc_mod_date(rs.getString("rc_mod_date"));
+//				
+//				rentalClothesVo.setc_thumbnail(rs.getString("c_thumbnail"));
+//				rentalClothesVo.setc_name(rs.getString("c_name"));
+//				rentalClothesVo.setc_author(rs.getString("c_author"));
+//				rentalClothesVo.setc_publisher(rs.getString("c_publisher"));
+//				rentalClothesVo.setc_publish_year(rs.getString("c_publish_year"));
+//				rentalClothesVo.setc_isbn(rs.getString("c_isbn"));
+//				rentalClothesVo.setc_call_number(rs.getString("c_call_number"));
+//				rentalClothesVo.setc_rantal_able(rs.getInt("c_rantal_able"));
+//				rentalClothesVo.setc_reg_date(rs.getString("c_reg_date"));
+//				
+//				rentalClothesVo.setU_m_id(rs.getString("u_m_id"));
+//				rentalClothesVo.setU_m_pw(rs.getString("u_m_pw"));
+//				rentalClothesVo.setU_m_name(rs.getString("u_m_name"));
+//				rentalClothesVo.setU_m_gender(rs.getString("u_m_gender"));
+//				rentalClothesVo.setU_m_mail(rs.getString("u_m_mail"));
+//				rentalClothesVo.setU_m_phone(rs.getString("u_m_phone"));
+//				rentalClothesVo.setU_m_reg_date(rs.getString("u_m_reg_date"));
+//				rentalClothesVo.setU_m_mod_date(rs.getString("u_m_mod_date"));
+//				
+//				return rentalClothesVo;
+//				
+//			}
+//			
+//		});
+//		
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//		
+//	}
+//	
+//	return rentalClothesVos;
+//	
+//}
+
+public List<RentalClothesVo> selectRentalClothess() {
+	System.out.println("[ClothesDao] selectRentalClothess()");
+	
+	String sql =  "SELECT * FROM tbl_rental_Clothes rb "
+				+ "JOIN tbl_Clothes b "
+				+ "ON rb.c_no = b.c_no "
+				+ "JOIN tbl_user_member um "
+				+ "ON rb.u_m_no = um.u_m_no "
+				+ "WHERE rb.rc_end_date = '1000-01-01' "
+				+ "ORDER BY um.u_m_id ASC, rb.rc_reg_date DESC";
+	
+	List<RentalClothesVo> rentalClothesVos = new ArrayList<RentalClothesVo>();
+	
+	try {
+		
+		RowMapper<RentalClothesVo> rowMapper = BeanPropertyRowMapper.newInstance(RentalClothesVo.class);
+		rentalClothesVos = jdbcTemplate.query(sql, rowMapper);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	}
+	
+	return rentalClothesVos;
+	
+}
+
+public int updateRentalClothes(int rc_no) {
+	System.out.println("[ClothesDao] updateRentalClothes()");
+	
+	String sql =  "UPDATE tbl_rental_Clothes "
+				+ "SET rc_end_date = NOW() "
+				+ "WHERE rc_no = ?";
+	
+	int result = -1;
+	
+	try {
+		
+		result = jdbcTemplate.update(sql, rc_no);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	}
+	
+	return result;
+}
+
+public int updateClothes(int c_no) {
+	System.out.println("[ClothesDao] updateRentalClothes()");
+	
+	String sql =  "UPDATE tbl_Clothes "
+				+ "SET c_rantal_able = 1 "
+				+ "WHERE c_no = ?";
+	
+	int result = -1;
+	
+	try {
+		
+		result = jdbcTemplate.update(sql, c_no);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	}
+	
+	return result;
+	
+}
 	
 }

@@ -26,7 +26,7 @@
 		
 			<div class="word">
 			
-				<h3>RETURN BOOK SUCCESS!!</h3>
+				<h3>의류 반납 성공! 킹애! ദ്ദി ( ᵔ ᗜ ᵔ )</h3>
 				
 			</div>
 			

@@ -37,7 +37,7 @@
 					<input type="text"		name="a_m_id" 		placeholder="관리자 ID 입력"> <br>
 					<input type="password"	name="a_m_pw" 		placeholder="관리자 비밀번호 입력"> <br>
 					<input type="button"	value="로그인" onclick="loginForm();"> 
-					<input type="reset"		value="리셋">
+					<input type="reset"		value="초기화">
 					
 				</form>
 				

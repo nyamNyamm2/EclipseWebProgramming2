@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.office.library.book.BookVo;
+import com.office.library.book.HopeBookVo;
 import com.office.library.book.RentalBookVo;
 
 @Service
 //@Service("admin.BookService")
 public class BookService {
 
-	final static public int BOOK_ISBN_ALREADY_EXIST = 0;		// 이미 등록된 도서
+	final static public int BOOK_ISBN_ALREADY_EXIST = 0;	// 이미 등록된 도서
 	final static public int BOOK_REGISTER_SUCCESS = 1;		// 신규 도서 등록 성공
 	final static public int BOOK_REGISTER_FAIL = -1;		// 신규 도서 등록 실패
 	
@@ -91,6 +92,46 @@ public class BookService {
 			result = bookDao.updateBook(b_no);
 			
 		return result;
+	}
+	
+	public List<HopeBookVo> getHopeBooks() {
+		System.out.println("[BookService] getHopeBooks()");
+		
+		return bookDao.selectHopeBooks();
+		
+	}
+	
+	public int registerHopeBookConfirm(BookVo bookVo, int hb_no) {
+		System.out.println("[BookService] registerHopeBookConfirm()");
+		
+		boolean isISBN = bookDao.isISBN(bookVo.getB_isbn());
+		
+		if (!isISBN) {
+			int result = bookDao.insertBook(bookVo);
+			
+			if (result > 0) {
+				
+				bookDao.updateHopeBookResult(hb_no);
+				
+				return BOOK_REGISTER_SUCCESS;
+				
+			} else {
+				return BOOK_REGISTER_FAIL;
+				
+			}
+			
+		} else {
+			return BOOK_ISBN_ALREADY_EXIST;
+			
+		}
+		
+	}
+	
+	public List<BookVo> getAllBooks() {
+		System.out.println("[BookService] getAllBooks()");
+		
+		return bookDao.selectAllBooks();
+		
 	}
 	
 	

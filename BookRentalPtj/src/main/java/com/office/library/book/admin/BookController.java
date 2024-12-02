@@ -10,15 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.office.library.admin.member.AdminMemberVo;
 import com.office.library.book.BookVo;
+import com.office.library.book.RentalBookVo;
 import com.office.library.book.admin.util.UploadFileService;
 
 @Controller
+//@Controller("admin.BookController")
 @RequestMapping("/book/admin")
 public class BookController {
 
@@ -184,6 +185,45 @@ public class BookController {
 		
 		if (result <= 0)
 			nextPage = "admin/book/delete_book_ng";
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 대출 도서 목록
+	 */
+	
+//	@RequestMapping(value = "/getRentalBooks", method = RequestMethod.GET)
+	@GetMapping("/getRentalBooks")
+	public String getRentalBooks(Model model) {
+		System.out.println("[BookController] getRentalBooks()");
+		
+		String nextPage = "admin/book/rental_books";
+		
+		List<RentalBookVo> rentalBookVos = bookService.getRentalBooks();
+		
+		model.addAttribute("rentalBookVos", rentalBookVos);
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 도서 반납 확인
+	 */
+//	@RequestMapping(value = "/returnBookConfirm", method = RequestMethod.GET)
+	@GetMapping("/returnBookConfirm")
+	public String returnBookConfirm(@RequestParam("b_no") int b_no, 
+									@RequestParam("rb_no") int rb_no) {
+		System.out.println("[BookController] returnBookConfirm()");
+		
+		String nextPage = "admin/book/return_book_ok";
+		
+		int result = bookService.returnBookConfirm(b_no, rb_no);
+		
+		if (result <= 0)
+			nextPage = "admin/book/return_book_ng";
 		
 		return nextPage;
 		

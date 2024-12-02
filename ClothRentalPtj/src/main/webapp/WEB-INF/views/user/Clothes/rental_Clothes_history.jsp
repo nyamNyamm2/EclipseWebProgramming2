@@ -10,7 +10,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/rental_book_history.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/user/rental_Clothes_history.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -25,38 +25,36 @@
 		
 			<div class="word">
 			
-				<h3>RENTAL BOOK HISTORY</h3>
+				<h3>대여 의류 목록</h3>
 				
 			</div>
 			
-			<div class="rental_book_history">
+			<div class="rental_Clothes_history">
 				
 				<table>
 					<thead>
 						<tr>
-							<th>도서명</th>
-							<th>ISBN</th>
-							<th>청구기호</th>
-							<th>대출일</th>
+							<th>의류명</th>
+							<th>고유번호</th>
+							<th>대여일</th>
 							<th>반납일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${rentalBookVos}">
+						<c:forEach var="item" items="${rentalClothesVos}">
 							<tr>
 								<td>
-								<c:url value='/book/user/bookDetail' var='detail_url'>
-									<c:param name='b_no' value='${item.b_no}'/>
+								<c:url value='/Clothes/user/ClothesDetail' var='detail_url'>
+									<c:param name='c_no' value='${item.c_no}'/>
 								</c:url>
-								<a href="${detail_url}">${item.b_name}</a>
+								<a href="${detail_url}">${item.c_name}</a>
 								</td>
-								<td>${item.b_isbn}</td>
-								<td>${item.b_call_number}</td>
-								<td>${item.rb_start_date}</td>
+								<td>${item.c_isbn}</td>
+								<td>${item.rc_start_date}</td>
 								<td>
 								<c:choose>
-									<c:when test="${fn:contains(item.rb_end_date, '1000-01-01')}">대출중</c:when>
-									<c:otherwise>${item.rb_end_date}</c:otherwise>
+									<c:when test="${fn:contains(item.rc_end_date, '1000-01-01')}">대여중</c:when>
+									<c:otherwise>${item.rc_end_date}</c:otherwise>
 								</c:choose>
 								</td>
 							</tr>

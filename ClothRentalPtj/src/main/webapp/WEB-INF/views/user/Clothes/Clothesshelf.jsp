@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/bookshelf.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/user/Clothesshelf.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,38 +24,36 @@
 		
 			<div class="word">
 			
-				<h3>MY BOOKSHELF</h3>
+				<h3>나의 옷장</h3>
 				
 			</div>
 			
 			<%-- 대출 목록 --%>
 			<div class="category_name">
-				<h4>대출 목록</h4>
+				<h4>대여 목록</h4>
 			</div>
 			
-			<div class="rental_book_list">
+			<div class="rental_Clothes_list">
 				
 				<table>
 					<thead>
 						<tr>
-							<th>도서명</th>
-							<th>ISBN</th>
-							<th>청구기호</th>
-							<th>대출일</th>
+							<th>의류명</th>
+							<th>고유번호</th>
+							<th>대여일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${rentalBookVos}">
+						<c:forEach var="item" items="${rentalClothesVos}">
 							<tr>
 								<td>
-								<c:url value='/book/user/bookDetail' var='detail_url'>
-									<c:param name='b_no' value='${item.b_no}'/>
+								<c:url value='/Clothes/user/ClothesDetail' var='detail_url'>
+									<c:param name='c_no' value='${item.c_no}'/>
 								</c:url>
-								<a href="${detail_url}">${item.b_name}</a>
+								<a href="${detail_url}">${item.c_name}</a>
 								</td>
-								<td>${item.b_isbn}</td>
-								<td>${item.b_call_number}</td>
-								<td>${item.rb_start_date}</td>
+								<td>${item.c_isbn}</td>
+								<td>${item.rc_start_date}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -69,9 +67,9 @@
 			 - 희망 도서 요청 목록 
 			--%>
 			<div class="other_category">
-				<a href="<c:url value='/book/user/listupRentalBookHistory'/>">전체 대출 이력</a>
-				<a href="<c:url value='/book/user/requestHopeBookForm'/>">희망 도서 요청</a>
-				<a href="<c:url value='/book/user/listupRequestHopeBook'/>">희망 도서 요청 목록 </a>
+				<a href="<c:url value='/Clothes/user/listupRentalClothesHistory'/>">전체 대여 이력</a>
+				<a href="<c:url value='/Clothes/user/requestHopeClothesForm'/>">희망 의류 요청</a>
+				<a href="<c:url value='/Clothes/user/listupRequestHopeClothes'/>">희망 의류 요청 목록 </a>
 			</div>
 		
 		</div>

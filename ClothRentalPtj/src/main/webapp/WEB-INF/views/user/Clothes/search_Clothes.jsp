@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/search_book.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/user/search_Clothes.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,44 +24,42 @@
 		
 			<div class="word">
 			
-				<h3>BOOK SEARCH RESULTS</h3>
+				<h3>의류 검색 결과</h3>
 				
 			</div>
 			
-			<div class="book_list">
+			<div class="Clothes_list">
 			
 				<table>
 					<thead>
 						<tr>
-							<th>도서명</th>
-							<th>저자</th>
-							<th>발행처</th>
-							<th>발행연도</th>
-							<th>ISBN</th>
-							<th>청구기호</th>
+							<th>의류명</th>
+							<th>브랜드</th>
+							<th>제조국가</th>
+							<th>제조년도</th>
+							<th>고유번호</th>
 							<th>대출가능</th>
 						</tr>
 					</thead>
 					
 					<tbody>
 						
-						<c:forEach var="item" items="${bookVos}">
+						<c:forEach var="item" items="${ClothesVos}">
 							<tr>
 								<td>
-								<c:url value='/book/user/bookDetail' var='detail_url'>
-									<c:param name='b_no' value='${item.b_no}'/>
+								<c:url value='/Clothes/user/ClothesDetail' var='detail_url'>
+									<c:param name='c_no' value='${item.c_no}'/>
 								</c:url>
-								<a href="${detail_url}">${item.b_name}</a>
+								<a href="${detail_url}">${item.c_name}</a>
 								</td>
-								<td>${item.b_author}</td>
-								<td>${item.b_publisher}</td>
-								<td>${item.b_publish_year}</td>
-								<td>${item.b_isbn}</td>
-								<td>${item.b_call_number}</td>
+								<td>${item.c_author}</td>
+								<td>${item.c_publisher}</td>
+								<td>${item.c_publish_year}</td>
+								<td>${item.c_isbn}</td>
 								<td>
 								<c:choose>
-									<c:when test="${item.b_rantal_able eq '0'}"> <c:out value="X" /> </c:when>
-									<c:when test="${item.b_rantal_able eq '1'}"> <c:out value="O" /> </c:when>
+									<c:when test="${item.c_rantal_able eq '0'}"> <c:out value="X" /> </c:when>
+									<c:when test="${item.c_rantal_able eq '1'}"> <c:out value="O" /> </c:when>
 									<c:otherwise> <c:out value="X" /> </c:otherwise>
 								</c:choose>
 								</td>

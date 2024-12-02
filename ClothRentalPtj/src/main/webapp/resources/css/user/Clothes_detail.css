@@ -13,51 +13,51 @@ section {
 	text-align: center;
 	}
 	
-#section_wrap .book_detail {
+#section_wrap .Clothes_detail {
 	width: 1024px;
 	margin: 0 auto;
 	}
 
-#section_wrap .book_detail ul {
+#section_wrap .Clothes_detail ul {
 	width: 100%;
 	overflow: hidden;
 	}
 
-#section_wrap .book_detail ul li {
+#section_wrap .Clothes_detail ul li {
 	float: left;
 	border: 1px solid #e1e1e1;
 	text-align: center;
 	}
 
-#section_wrap .book_detail ul li:nth-child(1) {
+#section_wrap .Clothes_detail ul li:nth-child(1) {
 	width: 274px; height: 379px;
 	overflow: hidden;
 	}
 
-#section_wrap .book_detail ul li:nth-child(1) img {
+#section_wrap .Clothes_detail ul li:nth-child(1) img {
 	max-width: 100%;
 }
 
-#section_wrap .book_detail ul li:nth-child(2) {
+#section_wrap .Clothes_detail ul li:nth-child(2) {
 	width: 746px;
 	}
 
-#section_wrap .book_detail ul li:nth-child(2) table {
+#section_wrap .Clothes_detail ul li:nth-child(2) table {
 	width: 100%;
 	border-collapse: collapse;
 	}
 
-#section_wrap .book_detail ul li:nth-child(2) table tr td {
+#section_wrap .Clothes_detail ul li:nth-child(2) table tr td {
 	border: 1px solid #e1e1e1;
 	padding: 10px;
 	}
 
-#section_wrap .book_detail ul li:nth-child(2) table tr td:nth-child(1) {
+#section_wrap .Clothes_detail ul li:nth-child(2) table tr td:nth-child(1) {
 	width: 100px;
 	text-align: right;
 	}
 	
-#section_wrap .book_detail ul li:nth-child(2) table tr td:nth-child(2) {
+#section_wrap .Clothes_detail ul li:nth-child(2) table tr td:nth-child(2) {
 	text-align: left;
 	font-weight: bolder;
 	}

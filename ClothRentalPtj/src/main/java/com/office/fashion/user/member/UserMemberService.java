@@ -136,10 +136,17 @@ public class UserMemberService {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				mimeMessageHelper.setTo("taehoedu@gmail.com");	// 수신 가능한 개인 메일 주소
+				mimeMessageHelper.setTo("201910852@office.seowon.ac.kr");
 //				mimeMessageHelper.setTo(toMailAddr);
-				mimeMessageHelper.setSubject("[한국 도서관] 새 비밀번호 안내입니다.");
-				mimeMessageHelper.setText("새 비밀번호 : " + newPassword, true);
+				mimeMessageHelper.setSubject("[서원 편집샵] 민감한 정보가 포함된 메일입니다.");
+				
+				String content = "새로운 비밀번호가 포함된 메일입니다. 확인하시기 전 사주경계를 확실히 하시기 바랍니다."
+									+ "<br>" + "<br>" + "<br>" + "새 비밀번호 : " + newPassword + "<br>" + "다시 로그인을 시도 하시려면 <a href='http://localhost:8090/fashion/admin/member/loginForm'>로그인</a>으로 이동하십시오." 
+									+ "<br>" + "<br>" + "본인이 직접 비밀번호 찾기를 한 것이 아니라면 유감입니다♥"
+									+ "<br>" + "<br>" + "<br>" + "항상 저희 서원 편집샵을 이용해주셔서 감사합니다! 킹애! ദ്ദി ( ᵔ ᗜ ᵔ )";
+
+				// HTML 형식으로 메일을 보낼 때 true 설정
+				mimeMessageHelper.setText(content, true);
 				
 			}
 			

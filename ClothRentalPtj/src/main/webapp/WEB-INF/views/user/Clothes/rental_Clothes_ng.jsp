@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/rental_book_result.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/user/rental_Clothes_result.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 		
 			<div class="word">
 			
-				<h3>RENTAL BOOK SUCCESS!!</h3>
+				<h3>의상 대여 실패...ㄴ(ㅜ_ㅜ)ㄱ</h3>
 				
 			</div>
 		

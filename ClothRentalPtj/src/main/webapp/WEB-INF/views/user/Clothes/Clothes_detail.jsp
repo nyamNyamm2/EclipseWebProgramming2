@@ -9,7 +9,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/user/book_detail.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/user/Clothes_detail.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,59 +24,55 @@
 		
 			<div class="word">
 			
-				<h3>BOOK DETAIL</h3>
+				<h3>의류 상세 정보</h3>
 				
 			</div>
 			
-			<div class="book_detail">
+			<div class="Clothes_detail">
 			
 				<ul>
 					<li>
-						<img src="<c:url value="/libraryUploadImg/${bookVo.b_thumbnail}"/>">
+						<img src="<c:url value="/libraryUploadImg/${ClothesVo.c_thumbnail}"/>">
 					</li>
 					<li>
 						<table>
 							<tr>
-								<td>도서명</td>
-								<td>${bookVo.b_name}</td>
+								<td>의류명</td>
+								<td>${ClothesVo.c_name}</td>
 							</tr>
 							<tr>
-								<td>저자</td>
-								<td>${bookVo.b_author}</td>
+								<td>브랜드</td>
+								<td>${ClothesVo.c_author}</td>
 							</tr>
 							<tr>
-								<td>발행처</td>
-								<td>${bookVo.b_publisher}</td>
+								<td>제조국가</td>
+								<td>${ClothesVo.c_publisher}</td>
 							</tr>
 							<tr>
-								<td>발행년도</td>
-								<td>${bookVo.b_publish_year}</td>
+								<td>제조년도</td>
+								<td>${ClothesVo.c_publish_year}</td>
 							</tr>
 							<tr>
 								<td>ISBN</td>
-								<td>${bookVo.b_isbn}</td>
-							</tr>
-							<tr>
-								<td>청구기호</td>
-								<td>${bookVo.b_call_number}</td>
+								<td>${ClothesVo.c_isbn}</td>
 							</tr>
 							<tr>
 								<td>대출가능</td>
 								<td>
 								<c:choose>
-									<c:when test="${bookVo.b_rantal_able eq '0'}"> <c:out value="X" /> </c:when>
-									<c:when test="${bookVo.b_rantal_able eq '1'}"> <c:out value="O" /> </c:when>
+									<c:when test="${ClothesVo.c_rantal_able eq '0'}"> <c:out value="X" /> </c:when>
+									<c:when test="${ClothesVo.c_rantal_able eq '1'}"> <c:out value="O" /> </c:when>
 									<c:otherwise> <c:out value="X" /> </c:otherwise>
 								</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<td>등록일</td>
-								<td>${bookVo.b_reg_date}</td>
+								<td>${ClothesVo.c_reg_date}</td>
 							</tr>
 							<tr>
 								<td>수정일</td>
-								<td>${bookVo.b_mod_date}</td>
+								<td>${ClothesVo.c_mod_date}</td>
 							</tr>
 						</table>
 					</li>
@@ -87,14 +83,14 @@
 			<div class="buttons">
 				
 				<c:choose>
-					<c:when test="${bookVo.b_rantal_able eq 0}">
-						<a href="#none">대출중</a>
+					<c:when test="${ClothesVo.c_rantal_able eq 0}">
+						<a href="#none">대여중</a>
 					</c:when>
-					<c:when test="${bookVo.b_rantal_able eq 1}">
-						<c:url value='/book/user/rentalBookConfirm' var='rental_url'>
-							<c:param name='b_no' value='${bookVo.b_no}'/>
+					<c:when test="${ClothesVo.c_rantal_able eq 1}">
+						<c:url value='/Clothes/user/rentalClothesConfirm' var='rental_url'>
+							<c:param name='c_no' value='${ClothesVo.c_no}'/>
 						</c:url>
-						<a class="rental_book_button" href="${rental_url}">도서 대출</a>
+						<a class="rental_Clothes_button" href="${rental_url}">의상 대여</a>
 					</c:when>
 				</c:choose>
 				

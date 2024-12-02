@@ -21,13 +21,13 @@ section {
 	text-align: center;
 	}
 
-#section_wrap .rental_book_list table {
+#section_wrap .rental_Clothes_list table {
 	width: 100%;
 	border-collapse: collapse;
 	font-size: .9em;
 	}
 
-#section_wrap .rental_book_list table thead tr th {
+#section_wrap .rental_Clothes_list table thead tr th {
 	border: 1px solid #e1e1e1;
 	padding: 10px 3px;
 	text-align: center;
@@ -35,23 +35,23 @@ section {
 	background-color: #a5a5a5;
 	}
 
-#section_wrap .rental_book_list table thead tr th:nth-child(1) {
+#section_wrap .rental_Clothes_list table thead tr th:nth-child(1) {
 	width: 450px;
 	}
 
-#section_wrap .rental_book_list table thead tr th:nth-child(2) {
+#section_wrap .rental_Clothes_list table thead tr th:nth-child(2) {
 	width: 150px;
 	}
 
-#section_wrap .rental_book_list table thead tr th:nth-child(3) {
+#section_wrap .rental_Clothes_list table thead tr th:nth-child(3) {
 	width: 200px;
 	}
 
-#section_wrap .rental_book_list table tbody tr:nth-child(2n-1) {
+#section_wrap .rental_Clothes_list table tbody tr:nth-child(2n-1) {
 	background-color: #f3f3f3;
 }
 
-#section_wrap .rental_book_list table tbody tr td {
+#section_wrap .rental_Clothes_list table tbody tr td {
 	border: 1px solid #e1e1e1;
 	padding: 10px 3px;
 	text-align: center;

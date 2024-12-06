@@ -20,7 +20,6 @@ public class RentalClothesVo {
 	String c_publisher;
 	String c_publish_year;
 	String c_isbn;
-	String c_call_number;
 	int c_rantal_able;
 	String c_reg_date;
 	String c_mod_date;

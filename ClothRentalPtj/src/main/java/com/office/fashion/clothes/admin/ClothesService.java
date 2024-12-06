@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.office.fashion.clothes.ClothesVo;
-//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.HopeClothesVo;
 import com.office.fashion.clothes.RentalClothesVo;
 
 @Service
@@ -92,6 +92,47 @@ public class ClothesService {
 			result = clothesDao.updateClothes(rc_no);
 			
 		return result;
+	}
+	
+
+	public List<HopeClothesVo> getHopeClothess() {
+		System.out.println("[ClothesService] getHopeClothess()");
+		
+		return clothesDao.selectHopeClothess();
+		
+	}
+	
+	public int registerHopeClothesConfirm(ClothesVo ClothesVo, int hc_no) {
+		System.out.println("[ClothesService] registerHopeClothesConfirm()");
+		
+		boolean isISBN = clothesDao.isISBN(ClothesVo.getC_isbn());
+		
+		if (!isISBN) {
+			int result = clothesDao.insertClothes(ClothesVo);
+			
+			if (result > 0) {
+				
+				clothesDao.updateHopeClothesResult(hc_no);
+				
+				return Clothes_REGISTER_SUCCESS;
+				
+			} else {
+				return Clothes_REGISTER_FAIL;
+				
+			}
+			
+		} else {
+			return Clothes_ISBN_ALREADY_EXIST;
+			
+		}
+		
+	}
+	
+	public List<ClothesVo> getAllClothess() {
+		System.out.println("[ClothesService] getAllClothess()");
+		
+		return clothesDao.selectAllClothess();
+		
 	}
 	
 }

@@ -11,7 +11,7 @@
 
 <jsp:include page="../../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/admin/hope_books.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/admin/hope_Clothess.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -26,46 +26,46 @@
 		
 			<div class="word">
 			
-				<h3>HOPE BOOKS</h3>
+				<h3>희망 의류</h3>
 				
 			</div>
 			
-			<div class="book_list">
+			<div class="Clothes_list">
 			
 				<table>
 					<thead>
 						<tr>
 							<th>요청회원</th>
-							<th>도서명</th>
-							<th>저자</th>
-							<th>발행처</th>
-							<th>발행연도</th>
+							<th>의류명</th>
+							<th>브랜드</th>
+							<th>제조국가</th>
+							<th>제조년도</th>
 							<th>입고</th>
 						</tr>
 					</thead>
 					
 					<tbody>
 						
-						<c:forEach var="item" items="${hopeBookVos}">
+						<c:forEach var="item" items="${hopeClothesVos}">
 							<tr>
 								<td>${item.u_m_id}</td>
-								<td>${item.hb_name}</td>
-								<td>${item.hb_author}</td>
-								<td>${item.hb_publisher}</td>
-								<td>${item.hb_publish_year}</td>
+								<td>${item.hc_name}</td>
+								<td>${item.hc_author}</td>
+								<td>${item.hc_publisher}</td>
+								<td>${item.hc_publish_year}</td>
 								<td>
 									<c:choose>
-										<c:when test="${item.hb_result eq 0}">
-											<c:url value="/book/admin/registerHopeBookForm" var="hope_book_url">
-												<c:param name="hb_no" value="${item.hb_no}"/>
-												<c:param name="hb_name" value="${item.hb_name}"/>
-												<c:param name="hb_author" value="${item.hb_author}"/>
-												<c:param name="hb_publisher" value="${item.hb_publisher}"/>
-												<c:param name="hb_publish_year" value="${item.hb_publish_year}"/>
+										<c:when test="${item.hc_result eq 0}">
+											<c:url value="/Clothes/admin/registerHopeClothesForm" var="hope_Clothes_url">
+												<c:param name="hc_no" value="${item.hc_no}"/>
+												<c:param name="hc_name" value="${item.hc_name}"/>
+												<c:param name="hc_author" value="${item.hc_author}"/>
+												<c:param name="hc_publisher" value="${item.hc_publisher}"/>
+												<c:param name="hc_publish_year" value="${item.hc_publish_year}"/>
 											</c:url>
-											<a href="${hope_book_url}">입고</a>
+											<a href="${hope_Clothes_url}">입고</a>
 										</c:when>
-										<c:when test="${item.hb_result eq 1}">
+										<c:when test="${item.hc_result eq 1}">
 											완료
 										</c:when>
 									</c:choose>

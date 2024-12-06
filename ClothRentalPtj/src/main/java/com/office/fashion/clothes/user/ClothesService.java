@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.office.fashion.clothes.ClothesVo;
+import com.office.fashion.clothes.HopeClothesVo;
 import com.office.fashion.clothes.RentalClothesVo;
 
 @Service
@@ -51,6 +52,21 @@ public class ClothesService {
 		System.out.println("[ClothesService] listupRentalClothesHistory()");
 		
 		return ClothesDao.selectRentalClothesHistory(u_m_no);
+		
+	}
+	
+
+	public int requestHopeClothesConfirm(HopeClothesVo hopeClothesVo) {
+		System.out.println("[ClothesService] requestHopeClothesConfirm()");
+		
+		return ClothesDao.insertHopeClothes(hopeClothesVo);
+		
+	}
+	
+	public List<HopeClothesVo> listupRequestHopeClothes(int u_m_no) {
+		System.out.println("[ClothesService] listupRequestHopeClothes()");
+		
+		return ClothesDao.selectRequestHopeClothess(u_m_no);
 		
 	}
 	

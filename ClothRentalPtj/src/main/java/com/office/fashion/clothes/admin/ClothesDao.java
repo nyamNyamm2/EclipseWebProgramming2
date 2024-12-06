@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.office.fashion.clothes.ClothesVo;
-//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.HopeClothesVo;
 import com.office.fashion.clothes.RentalClothesVo;
 
 @Component
@@ -292,74 +292,169 @@ public class ClothesDao {
 //	
 //}
 
-public List<RentalClothesVo> selectRentalClothess() {
-	System.out.println("[ClothesDao] selectRentalClothess()");
-	
-	String sql =  "SELECT * FROM tbl_rental_Clothes rb "
-				+ "JOIN tbl_Clothes b "
-				+ "ON rb.c_no = b.c_no "
-				+ "JOIN tbl_user_member um "
-				+ "ON rb.u_m_no = um.u_m_no "
-				+ "WHERE rb.rc_end_date = '1000-01-01' "
-				+ "ORDER BY um.u_m_id ASC, rb.rc_reg_date DESC";
-	
-	List<RentalClothesVo> rentalClothesVos = new ArrayList<RentalClothesVo>();
-	
-	try {
+	public List<RentalClothesVo> selectRentalClothess() {
+		System.out.println("[ClothesDao] selectRentalClothess()");
 		
-		RowMapper<RentalClothesVo> rowMapper = BeanPropertyRowMapper.newInstance(RentalClothesVo.class);
-		rentalClothesVos = jdbcTemplate.query(sql, rowMapper);
+		String sql =  "SELECT * FROM tbl_rental_Clothes rb "
+					+ "JOIN tbl_Clothes b "
+					+ "ON rb.c_no = b.c_no "
+					+ "JOIN tbl_user_member um "
+					+ "ON rb.u_m_no = um.u_m_no "
+					+ "WHERE rb.rc_end_date = '1000-01-01' "
+					+ "ORDER BY um.u_m_id ASC, rb.rc_reg_date DESC";
 		
-	} catch (Exception e) {
-		e.printStackTrace();
+		List<RentalClothesVo> rentalClothesVos = new ArrayList<RentalClothesVo>();
 		
-	}
-	
-	return rentalClothesVos;
-	
-}
-
-public int updateRentalClothes(int rc_no) {
-	System.out.println("[ClothesDao] updateRentalClothes()");
-	
-	String sql =  "UPDATE tbl_rental_Clothes "
-				+ "SET rc_end_date = NOW() "
-				+ "WHERE rc_no = ?";
-	
-	int result = -1;
-	
-	try {
+		try {
+			
+			RowMapper<RentalClothesVo> rowMapper = BeanPropertyRowMapper.newInstance(RentalClothesVo.class);
+			rentalClothesVos = jdbcTemplate.query(sql, rowMapper);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 		
-		result = jdbcTemplate.update(sql, rc_no);
-		
-	} catch (Exception e) {
-		e.printStackTrace();
+		return rentalClothesVos;
 		
 	}
 	
-	return result;
-}
-
-public int updateClothes(int c_no) {
-	System.out.println("[ClothesDao] updateRentalClothes()");
-	
-	String sql =  "UPDATE tbl_Clothes "
-				+ "SET c_rantal_able = 1 "
-				+ "WHERE c_no = ?";
-	
-	int result = -1;
-	
-	try {
+	public int updateRentalClothes(int rc_no) {
+		System.out.println("[ClothesDao] updateRentalClothes()");
 		
-		result = jdbcTemplate.update(sql, c_no);
+		String sql =  "UPDATE tbl_rental_Clothes "
+					+ "SET rc_end_date = NOW() "
+					+ "WHERE rc_no = ?";
 		
-	} catch (Exception e) {
-		e.printStackTrace();
+		int result = -1;
+		
+		try {
+			
+			result = jdbcTemplate.update(sql, rc_no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return result;
+	}
+	
+	public int updateClothes(int c_no) {
+		System.out.println("[ClothesDao] updateRentalClothes()");
+		
+		String sql =  "UPDATE tbl_Clothes "
+					+ "SET c_rantal_able = 1 "
+					+ "WHERE c_no = ?";
+		
+		int result = -1;
+		
+		try {
+			
+			result = jdbcTemplate.update(sql, c_no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return result;
 		
 	}
 	
-	return result;
+	public List<HopeClothesVo> selectHopeClothess() {
+		System.out.println("[ClothesDao] selectHopeClothess()");
+		
+		String sql =  "SELECT * FROM tbl_hope_Clothes hb "
+					+ "JOIN tbl_user_member um "
+					+ "ON hb.u_m_no = um.u_m_no "
+					+ "ORDER BY hb.hc_no DESC";
+		
+		List<HopeClothesVo> hopeClothesVos = new ArrayList<HopeClothesVo>();
+		
+		try {
+			
+			hopeClothesVos = jdbcTemplate.query(sql, new RowMapper<HopeClothesVo>() {
 	
-}
+				@Override
+				public HopeClothesVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					
+					HopeClothesVo hopeClothesVo = new HopeClothesVo();
+					
+					hopeClothesVo.setHc_no(rs.getInt("hc_no"));
+					hopeClothesVo.setHc_name(rs.getString("hc_name"));
+					hopeClothesVo.setHc_author(rs.getString("hc_author"));
+					hopeClothesVo.setHc_publisher(rs.getString("hc_publisher"));
+					hopeClothesVo.setHc_publish_year(rs.getString("hc_publish_year"));
+					hopeClothesVo.setHc_reg_date(rs.getString("hc_reg_date"));
+					hopeClothesVo.setHc_mod_date(rs.getString("hc_mod_date"));
+					hopeClothesVo.setHc_result(rs.getInt("hc_result"));
+					hopeClothesVo.setHc_result_last_date(rs.getString("hc_result_last_date"));
+					
+					hopeClothesVo.setU_m_no(rs.getInt("u_m_no"));
+					hopeClothesVo.setU_m_id(rs.getString("u_m_id"));
+					hopeClothesVo.setU_m_pw(rs.getString("u_m_pw"));
+					hopeClothesVo.setU_m_name(rs.getString("u_m_name"));
+					hopeClothesVo.setU_m_gender(rs.getString("u_m_gender"));
+					hopeClothesVo.setU_m_mail(rs.getString("u_m_mail"));
+					hopeClothesVo.setU_m_phone(rs.getString("u_m_phone"));
+					hopeClothesVo.setU_m_reg_date(rs.getString("u_m_reg_date"));
+					hopeClothesVo.setU_m_reg_date(rs.getString("u_m_mod_date"));
+					
+					return hopeClothesVo;
+					
+				}
+				
+			});
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return hopeClothesVos;
+		
+	}
+	
+	
+	public void updateHopeClothesResult(int hc_no) {
+		System.out.println("[ClothesDao] updateHopeClothesResult()");
+		
+		String sql =  "UPDATE tbl_hope_Clothes "
+					+ "SET hc_result = 1, hc_result_last_date = NOW() "
+					+ "WHERE hc_no = ?";
+		
+		try {
+			
+			jdbcTemplate.update(sql, hc_no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	public List<ClothesVo> selectAllClothess() {
+		System.out.println("[ClothesDao] selectAllClothess()");
+		
+		String sql =  "SELECT * FROM tbl_Clothes "
+					+ "ORDER BY c_reg_date DESC";
+		
+		List<ClothesVo> Clothess = new ArrayList<ClothesVo>();
+		
+		try {
+			
+			RowMapper<ClothesVo> rowMapper = BeanPropertyRowMapper.newInstance(ClothesVo.class);
+			Clothess = jdbcTemplate.query(sql, rowMapper);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return Clothess.size() > 0 ? Clothess : null;
+		
+	}
 	
 }

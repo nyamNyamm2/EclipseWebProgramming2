@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.office.fashion.admin.member.AdminMemberVo;
 import com.office.fashion.clothes.ClothesVo;
-//import com.office.fashion.clothes.HopeClothesVo;
+import com.office.fashion.clothes.HopeClothesVo;
 import com.office.fashion.clothes.RentalClothesVo;
 import com.office.fashion.clothes.admin.util.UploadFileService;
 
@@ -226,6 +226,93 @@ public class ClothesController {
 		
 		if (result <= 0)
 			nextPage = "admin/Clothes/return_Clothes_ng";
+		
+		return nextPage;
+		
+	}
+	
+	
+	/*
+	 * 희망 도서 목록
+	 */
+//	@RequestMapping(value = "/getHopeClothess", method = RequestMethod.GET)
+	@GetMapping("/getHopeClothess")
+	public String getHopeClothess(Model model) {
+		System.out.println("[ClothesController] getHopeClothess()");
+		
+		String nextPage = "admin/Clothes/hope_Clothess";
+		
+		List<HopeClothesVo> hopeClothesVos = clothesService.getHopeClothess();
+		
+		model.addAttribute("hopeClothesVos", hopeClothesVos);
+		
+		return nextPage;
+		
+	}
+	
+	
+	/*
+	 * 희망 도서 등록(입고 처리)
+	 */
+//	@RequestMapping(value = "/registerHopeClothesForm", method = RequestMethod.GET)
+	@GetMapping("/registerHopeClothesForm")
+	public String registerHopeClothesForm(Model model, HopeClothesVo hopeClothesVo) {
+		System.out.println("[ClothesController] registerHopeClothesForm()");
+		
+		String nextPage = "admin/Clothes/register_hope_Clothes_form";
+		
+		model.addAttribute("hopeClothesVo", hopeClothesVo);
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 희망 도서 등록(입고 처리) 확인
+	 */
+//	@RequestMapping(value = "/registerHopeClothesConfirm", method = RequestMethod.POST)
+	@PostMapping("/registerHopeClothesConfirm")
+	public String registerHopeClothesConfirm(ClothesVo ClothesVo, 
+										  @RequestParam("hc_no") int hc_no, 
+										  @RequestParam("file") MultipartFile file) {
+		System.out.println("[ClothesController] registerHopeClothesConfirm()");
+		
+		System.out.println("hc_no: " + hc_no);
+		
+		String nextPage = "admin/Clothes/register_Clothes_ok";
+		
+		// SAVE FILE
+		String savedFileName = uploadFileService.upload(file);
+		
+		if (savedFileName != null) {
+			ClothesVo.setC_thumbnail(savedFileName);
+			int result = clothesService.registerHopeClothesConfirm(ClothesVo, hc_no);
+			
+			if (result <= 0)
+				nextPage = "admin/Clothes/register_Clothes_ng";
+		
+		} else {
+			nextPage = "admin/Clothes/register_Clothes_ng";
+		
+		}
+		
+		return nextPage;
+
+	}
+	
+	/*
+	 * 전체 도서 목록
+	 */
+//	@RequestMapping(value = "/getAllClothess", method = RequestMethod.GET)
+	@GetMapping("/getAllClothess")
+	public String getAllClothess(Model model) {
+		System.out.println("[ClothesController] getAllClothess()");
+		
+		String nextPage = "admin/Clothes/full_list_of_Clothess";
+		
+		List<ClothesVo> ClothesVos = clothesService.getAllClothess();
+		
+		model.addAttribute("ClothesVos", ClothesVos);
 		
 		return nextPage;
 		

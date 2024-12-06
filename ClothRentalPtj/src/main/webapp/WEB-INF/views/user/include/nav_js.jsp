@@ -8,9 +8,9 @@
 		
 		let form = document.search_Clothes_form;
 		
-		if (form.b_name.value == '') {
+		if (form.c_name.value == '') {
 			alert('찾으시는 의류 이름을 입력하십시오!');
-			form.b_name.focus();
+			form.c_name.focus();
 			
 		} else {
 			form.submit();

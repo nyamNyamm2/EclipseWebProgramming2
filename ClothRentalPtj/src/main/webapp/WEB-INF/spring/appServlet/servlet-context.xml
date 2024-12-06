@@ -28,8 +28,8 @@
 	<!--
 		<interceptor>
 			<mapping path="/admin/member/**"/>
-			<exclude-mapping path="/admin/member/bookDetail"/>
-			<exclude-mapping path="/admin/member/bookDetail"/>
+			<exclude-mapping path="/admin/member/ClothesDetail"/>
+			<exclude-mapping path="/admin/member/ClothesDetail"/>
 			<exclude-mapping path="/admin/member/createAccountForm"/>
 			<exclude-mapping path="/admin/member/createAccountConfirm"/>
 			<exclude-mapping path="/admin/member/loginForm"/>
@@ -39,15 +39,15 @@
 			<beans:bean class="com.office.library.admin.member.AdminMemberLoginInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/book/admin/**"/>
-			<exclude-mapping path="/book/admin/searchBookConfirm"/>
-			<exclude-mapping path="/book/admin/bookDetail"/>
+			<mapping path="/Clothes/admin/**"/>
+			<exclude-mapping path="/Clothes/admin/searchClothesConfirm"/>
+			<exclude-mapping path="/Clothes/admin/ClothesDetail"/>
 			<beans:bean class="com.office.library.admin.member.AdminMemberLoginInterceptor"/>
 		</interceptor> -->
 		<interceptor>
-			<mapping path="/book/user/rentalBookConfirm"/>
-			<mapping path="/book/user/enterBookshelf"/>
-			<mapping path="/book/user/listupRentalBookHistory"/>
+			<mapping path="/Clothes/user/rentalClothesConfirm"/>
+			<mapping path="/Clothes/user/enterClothesshelf"/>
+			<mapping path="/Clothes/user/listupRentalClothesHistory"/>
 			<mapping path="/user/member/**"/>
 			<exclude-mapping path="/user/member/createAccountForm"/>
 			<exclude-mapping path="/user/member/createAccountConfirm"/>

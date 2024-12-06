@@ -38,7 +38,7 @@
 		<div class="search">
 			
 			<form action="<c:url value='/Clothes/user/searchClothesConfirm' />" name="search_Clothes_form" method="get">
-				<input type="text" name="b_name" placeholder="찾으시는 의류를 검색해보세요!">
+				<input type="text" name="c_name" placeholder="찾으시는 의류를 검색해보세요!">
 				<input type="button" value="검색" onclick="searchClothesForm();">
 			</form>
 			
